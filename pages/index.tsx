@@ -1,4 +1,4 @@
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -16,6 +16,10 @@ export default function Page({ todos }: InferGetStaticPropsType<typeof getStatic
           content="https://nextjs-rho-topaz-21.vercel.app/"
           // content="https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg"
         />
+        <meta name="description" content="Free Web tutorials" />
+        <meta name="keywords" content="HTML, CSS, JavaScript" />
+        <meta name="author" content="John Doe" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/* Additional tags for Twitter etc. */}
         <meta name="twitter:card" content="summary_large_image" />
