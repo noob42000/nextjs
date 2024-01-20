@@ -1,3 +1,5 @@
+import { GetStaticPaths, GetStaticProps } from "next";
+
 type Todo = {
   userId: number;
   id: number;
@@ -5,8 +7,7 @@ type Todo = {
   completed: boolean;
 };
 
-export default function Page({ todo }) {
-  console.log({ todo });
+export default function Page({ todo }: { todo: Todo }) {
   return (
     <div>
       <strong>Userid : {todo.userId}</strong>
@@ -16,23 +17,29 @@ export default function Page({ todo }) {
   );
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = (async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
   const todos = await res.json();
 
   // Get the paths we want to pre-render based on todos
-  const paths = todos.slice(0, 10).map((todo) => ({
+  const paths = todos.slice(0, 10).map((todo: Todo) => ({
     params: { id: todo.id.toString() },
   }));
+  return {
+    paths: paths,
+    fallback: true, // false or "blocking"
+  };
+}) satisfies GetStaticPaths;
 
-  console.log(paths);
-  return { paths, fallback: true };
-};
-
-export async function getStaticProps({ params }) {
-  console.log(params, "params");
-  const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${params.id}`);
-  const todo = await res.json();
-
-  return { props: { todo } };
-}
+export const getStaticProps = (async (context) => {
+  const { params } = context;
+  if (params) {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${params.id}`);
+    const todo = await res.json();
+    return { props: { todo } };
+  } else {
+    return { props: { todo: [] } };
+  }
+}) satisfies GetStaticProps<{
+  todo: Todo;
+}>;
