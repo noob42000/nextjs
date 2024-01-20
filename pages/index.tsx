@@ -11,7 +11,10 @@ export default function Page({ todos }: InferGetStaticPropsType<typeof getStatic
         <meta property="og:description" content="A short description of your site or page content" />
         <meta property="og:url" content="https://nextjs-rho-topaz-21.vercel.app/" />
         <meta property="og:type" content="website" />
-        {/* <meta property="og:image" content="https://yourdomain.com/path-to-your-image.jpg" /> */}
+        <meta
+          property="og:image"
+          content="https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg"
+        />
 
         {/* Additional tags for Twitter etc. */}
         <meta name="twitter:card" content="summary_large_image" />
