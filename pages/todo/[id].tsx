@@ -10,9 +10,9 @@ type Todo = {
 export default function Page({ todo }: { todo: Todo }) {
   return (
     <div>
-      <strong>Userid : {todo.userId}</strong>
+      <strong>Userid : {todo?.userId}</strong>
       <p>You have visited this todo</p>
-      <h1>{todo.title}</h1>
+      <h1>{todo?.title}</h1>
     </div>
   );
 }
